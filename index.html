@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Random Recipe Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"defer ></script>
+  </head>
+  <body>
+      <button id = "favorites">Favorites</button>
+    <div id = "mainBar">
+        <button id = "mainBarRandBtn">Get Random Recipe</button> 
+        <button id = "mainBarFridgeBtn">"What's in my fridge" Recipe</button>
+     </div>
+     
+    </div>
+        <div id ="randomSearchPanel">
+            <input id = "tag" placeholder = "Keywords...">
+            <input id = "recipesNumberRand" type = "number" placeholder = "How many recipes?">
+            <button id = "generateRandRecipeBtn">Generate</button>
+        </div>
+
+        <div id ="fridgeSearchPanel">
+            <input id = "userIngredients" placeholder = "Ingredients you have...">
+            <input id = "recipesNumberFridge" type = "number" placeholder = "How many recipes?">
+            <div id = "ignorePantryContainer">
+                <input type = "checkbox" id = "ignorePantry" value = "true">
+                <p> Ignore common ingredients(salt, water)</p>
+            </div>
+            <div id = "maxMinContainer">
+                <p>Choose one:</p>
+                <div id="maxContainer">
+                    <input id = "max" type = "checkbox" value = "1">
+                    <p> Use as many of my ingredients as possible</p>
+                </div> 
+                <div id="minContainer">
+                    <input id = "min" type = "checkbox" value = "2">
+                    <p> Require as few addititional ingredients as possible</p>
+                </div>
+            </div>
+            <button id = "generateFridgeRecipeBtn">Generate</button>
+        </div>
+        <div id = "resultsWrapper">
+        <div id = "resultsAreaRand">
+
+        </div>
+        <div id = "resultsAreaFridge">
+
+        </div>
+        <div id = "savedRecipesArea">
+
+        </div>
+        <div id = "popUpWrapper">
+            <div id = "popUpBtns">
+                <button id = "extBtn">Back to results</button>
+                <button id = "saveRecipeBtn">Save recipe</button>
+            </div>
+            <div id = "popUpContent">
+                
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
