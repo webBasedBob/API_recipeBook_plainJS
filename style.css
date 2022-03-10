@@ -1,229 +1,684 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-input, button{
-    border-radius: 5px;
-}
-img{
-    border-radius: 3px;
-    width: 20vw;
-    height: auto;
-}
-body{
-    background-color: rgb(0, 0, 0);
-    display: grid;
-    justify-items: center;
-    color: white;
-}
-
-::placeholder{
-    color: rgba(255, 255, 255, 0.514);
-}
-input{
-    color: rgba(255, 255, 255, 0.781);
-}
-button{
-    color: rgba(255, 255, 255, 0.781);;
-}
+@media (min-width:1000px){
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    input, button{
+        border-radius: 5px;
+    }
+    img{
+        border-radius: 3px;
+        width: 20vw;
+        height: auto;
+    }
+    body{
+        background-color: rgb(0, 0, 0);
+        display: grid;
+        justify-items: center;
+        color: white;
+    }
 
 
-#mainBar{
-    display:inline-flex;
-    align-items:center;
-    justify-items: center;
-    align-content: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    width:100%;
-    background-color: rgb(0, 0, 0);
-    position: fixed;
-    z-index: 100;
-}
-#mainBar *:hover{
-    position: relative;
-    bottom: 2px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-button :hover{
-    position: relative;
-    bottom: 2px;
-}
-#mainBar *:active{
-    position: relative;
-    top: 1px;
+    ::placeholder{
+        color: rgba(255, 255, 255, 0.514);
+    }
+    input{
+        color: rgba(255, 255, 255, 0.781);
+    }
+    button{
+        color: rgba(255, 255, 255, 0.781);;
+    }
 
-}
-#mainBarRandBtn, #mainBarKeywordsBtn, #mainBarIngredientsBtn, #savedRecipesBtn{
-    width: 20vw;
-    padding: 15px;
-    color: azure;
-    background-color: inherit;
-    border-style: none;
-    border-radius: 0;
-}
-#resultsAreaKeywords, #resultsAreaIngredients, #savedRecipesArea, #resultsAreaRand{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
-    text-align: center;
-}
-#resultsWrapper{
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.075);
-    border-color: rgba(165, 165, 165, 0.233);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    position: relative;
-    top: 7vw;
-}
 
-#resultsAreaKeywords div, #resultsAreaIngredients div, #savedRecipesArea div, #resultsAreaRand div{
-    padding: 1vw;
-    border-radius: 3px;
-    margin: 1vw;
-    color:rgba(255, 255, 255, 0.719);
-}
-#resultsAreaKeywords div:hover, #resultsAreaIngredients div:hover, #savedRecipesArea div:hover, #resultsAreaRand div:hover{
-    background-color: rgba(255, 255, 255, 0.103);
-    position: relative;
-    bottom: 3px;
-}
+    #mainBar{
+        display:inline-flex;
+        align-items:center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        width:100%;
+        background-color: rgb(0, 0, 0);
+        position: fixed;
+        z-index: 100;
+    }
+    #mainBar *:hover{
+        position: relative;
+        bottom: 2px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    button :hover{
+        position: relative;
+        bottom: 2px;
+    }
+    #mainBar *:active{
+        position: relative;
+        top: 1px;
 
-#resultsAreaKeywords p, #resultsAreaIngredients p, #savedRecipesArea p, #resultsAreaRand p{
-    max-width: 20vw;
-    height: 3ex;
-}
+    }
+    #mainBarRandBtn, #mainBarKeywordsBtn, #mainBarIngredientsBtn, #savedRecipesBtn{
+        width: 20vw;
+        padding: 15px;
+        color: azure;
+        background-color: inherit;
+        border-style: none;
+        border-radius: 0;
+    }
+    #resultsAreaKeywords, #resultsAreaIngredients, #savedRecipesArea, #resultsAreaRand{
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.075);
+        border-color: rgba(165, 165, 165, 0.233);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 3px;
+    }
 
-#keywordsSearchPanel, #ingredientsSearchPanel, #randomSearchPanel{
-    color: rgba(255, 255, 255, 0.781);
-    display: none;
-    padding: 1vw;
-    border-radius: 10px;
-    width: 30vw;
-    background-color: rgba(2, 2, 2, 0.692);
-    position: relative;
-    top: 5vw;
 
-}
+    #resultsAreaKeywords{
+        position: relative;
+        top: 4vw;
+    }
+    #resultsAreaIngredients{
+        position: relative;
+        top: 4.3vw;
+    }
+    #resultsAreaRand{
+        position: relative;
+        top: 4.1vw;   
+    }
+    #savedRecipesArea{
+        position: relative;
+        top: 3.2vw;
+    }
 
-#keywordsSearchPanel input, #ingredientsSearchPanel input, #randomSearchPanel input{
-    background-color: black;
-    padding: 2px;
-    margin: 2px;
+    #resultsWrapper{
+        height: fit-content;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        
+    }
 
-}
-#keywordsSearchPanel button, #ingredientsSearchPanel button, #randomSearchPanel button{
-    background-color: rgb(0, 255, 0);
-    color: black;
-    padding: 2px;
-    margin: 2px;
-    border-radius: 0;
-}
-#randomSearchPanel, #keywordsSearchPanel, #ingredientsSearchPanel{
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+    #resultsAreaKeywords div, #resultsAreaIngredients div, #savedRecipesArea div, #resultsAreaRand div{
+        padding: 1vw;
+        border-radius: 3px;
+        margin: 1vw;
+        color:rgba(255, 255, 255, 0.719);
+    }
+    #resultsAreaKeywords div:hover, #resultsAreaIngredients div:hover, #savedRecipesArea div:hover, #resultsAreaRand div:hover{
+        background-color: rgba(255, 255, 255, 0.103);
+        position: relative;
+        bottom: 3px;
+    }
 
-#popUpBackground{
+    #resultsAreaKeywords p, #resultsAreaIngredients p, #savedRecipesArea p, #resultsAreaRand p{
+        max-width: 20vw;
+        height: 3ex;
+    }
 
-    z-index: -1;
-    position: absolute;
-    height: inherit;
-    width: inherit;
-    background-image: url("https://www.ucsf.edu/sites/default/files/styles/article_feature_banner__image/public/2019-09/vegetables-cooking-food-banner-size.jpg");
-    filter: blur(10px) brightness(5%);
-    background-size: contain;
-}
-#popUpWrapper{
-    color: rgba(255, 255, 255, 0.781);
-    z-index: 120;
-    position: fixed;
-    top: -1vw;
-    /* background-color: rgb(8, 8, 8); */
-    width: 98vw;
-    height: 100vw;
-    border-radius: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-}
-#popUpWrapper button{
+    #keywordsSearchPanel, #ingredientsSearchPanel, #randomSearchPanel{
+        color: rgba(255, 255, 255, 0.781);
+        display: none;
+        padding: 1vw;
+        border-radius: 10px;
+        width: 30vw;
+        background-color: rgba(2, 2, 2, 0.692);
+        position: relative;
+        top: 3vw;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-    background-color: transparent;
-    margin: 1vw;
-    padding: 5px;
-}
-#popUpBtns{
+    #keywordsSearchPanel input, #ingredientsSearchPanel input, #randomSearchPanel input{
+        background-color: black;
+        padding: 2px;
+        margin: 2px;
 
-    display: flex;
-}
-#popUpContent{
+    }
+    #keywordsSearchPanel button, #ingredientsSearchPanel button, #randomSearchPanel button{
+        background-color: rgb(0, 255, 0);
+        color: black;
+        padding: 2px;
+        margin: 2px;
+        border-radius: 0;
+    }
 
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    margin: 2vw;
+    #popUpBackground{
+        z-index: -1;
+        position: absolute;
+        height: inherit;
+        width: inherit;
+        background-image: url("https://www.ucsf.edu/sites/default/files/styles/article_feature_banner__image/public/2019-09/vegetables-cooking-food-banner-size.jpg");
+        filter: blur(10px) brightness(15%);
+        background-size: contain;
+    }
+    #popUpWrapper{
+        color: rgba(255, 255, 255, 0.781);
+        z-index: 120;
+        position: fixed;
+        top: -1vw;
+        /* background-color: rgb(8, 8, 8); */
+        width: 98vw;
+        height: 100vw;
+        border-radius: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+    }
+    #popUpWrapper button{
 
-}
-#ignorePantryContainer, #maxContainer, #minContainer{
-    display: flex;
-}
+        background-color: transparent;
+        margin: 1vw;
+        padding: 5px;
+    }
+    #popUpBtns{
 
-#background{
-    background-color: black;
-    position: fixed;
-    height: 100vw;
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    background-image: url("https://frontiersinblog.files.wordpress.com/2017/07/frontiers-in-ict-food-bridging.jpg?w=940");
-    background-repeat: no-repeat;
-    z-index: -100;
-    filter: blur(0px) brightness(30%);
-    background-size: contain;
+        display: flex;
+    }
+    #popUpContent{
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        margin: 2vw;
+
+    }
+    #ignorePantryContainer, #maxContainer, #minContainer{
+        display: flex;
+    }
+
+    #background{
+        background-color: black;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background-image: url("https://frontiersinblog.files.wordpress.com/2017/07/frontiers-in-ict-food-bridging.jpg?w=940");
+        background-repeat: no-repeat;
+        /* transform: rotate(90deg); */
+        /* z-index: -100; */
+        filter: blur(0px) brightness(30%);
+        background-size: cover;
+        background-position: center;
+    }
+    #welcomeWrapper{
+        z-index: 2;
+        position: absolute;
+        top: 20vw;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+    }
+    #welcome{
+        width: 50vw;
+    }
+    #socialsWrapper{
+        display: inline-flex;
+        border-radius: 2px;
+        column-gap: 1vw;
+        align-items: center;
+        justify-content: center;
+    }
+    #socialsWrapper img{
+        width: 6vw;
+        background-color: rgba(255, 255, 255, 0.829);
+        padding: 5px;
+        margin:2vw;
+    }
+    #socialsWrapper img:hover{
+        position: relative;
+        bottom: 2px;
+    }
+    #socialsWrapper img:active{
+        position: relative;
+        top: 1px;
+    }
+
+
+    #keywordsSuggestionsWrapper,#ingredientsSuggestionsWrapper{
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        width: 32vw;
+        background-color: rgba(0, 0, 0, 0.685);
+        padding: 3px 3px 20px 3px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        color: rgba(255, 255, 255, 0.719);
+        z-index: 119;
+    }
+    #keywordsSuggestions, #ingredientsSuggestions{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        align-items: center;
+        justify-content: center;
+    }
+    #keywordsSuggestions p, #ingredientsSuggestions p, #suggestedIngredientsFilter button{
+        width: 7vw;
+        background: #00162A;
+        margin: 1px;
+        padding: 2px;
+        border-radius: 3px;
+        text-align: center;
+        border-color: rgba(255, 255, 255, 0.281);
+        border-style: solid;
+    }
+    #ingredientsSuggestionsWrapper{
+        display: none;
+        top: 17vw;
+    }
+
+    #keywordsSuggestionsWrapper{
+        display: none;
+        top: 12vw;
+    }
+
+    #ingredientsSuggestions p{
+        display: none;
+    }
+    #errorMessageWrapper{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        width: 20vw;
+        background-color: rgba(255, 255, 255, 0.74);
+        height: 10vw;
+        position: fixed;
+        bottom: 50%;
+        border-radius: 5px;
+    }
+    #errorMessageCloseBtn{
+        width:100%;
+        border-style: none;
+        border-radius: 0px  0px 5px 5px;
+        background-color: rgb(242, 89, 84);
+        position: absolute;
+        top: 81%;
+        height: 20%;
+    }
+    #errorMessageWrapper img{
+        width: 20%;
+        position: absolute;
+        bottom: 60%;
+    }
+}
+/* --------------------------------------------------------------------------------------------------=--------------------------------------v=--------------------------------------
+=--------------------------------------=--------------------------------------=--------------------------------------=-----------------------------=-----------------------------------------------
+=--------------------------------------=--------------------------------------=--------------------------------------=--------------------------------------=--------------------------------------
+-----------------------------------------------------------------------------------------------=--------------------------------------=--------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------=--------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------=--------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width:1000px){
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: 3.5vw;
+    }
+    input, button{
+        border-radius: 5px;
+    }
+    img{
+        border-radius: 3px;
+        width: 40vw;
+        height: auto;
+    }
+    body{
+        background-color: rgb(0, 0, 0);
+        display: grid;
+        justify-items: center;
+        color: white;
+
+    }
+
+
+    ::placeholder{
+        color: rgba(255, 255, 255, 0.514);
+    }
+    input{
+        color: rgba(255, 255, 255, 0.781);
+    }
+    button{
+        color: rgba(255, 255, 255, 0.781);;
+    }
+
+
+    #mainBar{
+        display:inline-flex;
+        align-items:center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        width:100%;
+        background-color: rgb(0, 0, 0);
+        position: fixed;
+        z-index: 100;
+    }
+    #mainBar *:hover{
+        position: relative;
+        bottom: 2px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    button :hover{
+        position: relative;
+        bottom: 2px;
+    }
+    #mainBar *:active{
+        position: relative;
+        top: 1px;
+
+    }
+    #mainBarRandBtn, #mainBarKeywordsBtn, #mainBarIngredientsBtn, #savedRecipesBtn{
+        width: 25%;
+        padding: 15px;
+        color: azure;
+        background-color: inherit;
+        border-style: none;
+        border-radius: 0;
+        height: 15vw;
+    }
+    #resultsAreaKeywords, #resultsAreaIngredients, #savedRecipesArea, #resultsAreaRand{
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.075);
+        border-color: rgba(165, 165, 165, 0.233);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 3px;
+        
+    }
+
+    #resultsAreaKeywords div p, #resultsAreaIngredients div p, #savedRecipesArea div p, #resultsAreaRand div p{
+        font-size: 20px;
+    }
+    #resultsAreaKeywords{
+        position: relative;
+        top: 25vw;
+    }
+    #resultsAreaIngredients{
+        position: relative;
+        top: 25vw;
+    }
+    #resultsAreaRand{
+        position: relative;
+        top: 25vw;
+    }
+    #savedRecipesArea{
+        position: relative;
+        top: 3.2vw;
+    }
+
+    #resultsWrapper{
+        width: 95vw;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        
+    }
+
+    #resultsAreaKeywords div, #resultsAreaIngredients div, #savedRecipesArea div, #resultsAreaRand div{
+        padding: 1vw;
+        border-radius: 3px;
+        margin: 1vw;
+        color:rgba(255, 255, 255, 0.719);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #resultsAreaKeywords div:hover, #resultsAreaIngredients div:hover, #savedRecipesArea div:hover, #resultsAreaRand div:hover{
+        background-color: rgba(255, 255, 255, 0.103);
+        position: relative;
+        bottom: 3px;
+    }
+
+    #resultsAreaKeywords p, #resultsAreaIngredients p, #savedRecipesArea p, #resultsAreaRand p{
+        max-width: 20vw;
+        height: 3ex;
+    }
+
+    #keywordsSearchPanel, #ingredientsSearchPanel, #randomSearchPanel{
+        color: rgba(255, 255, 255, 0.781);
+        display: none;
+        padding: 1vw;
+        border-radius: 10px;
+        width: 80%;
+        background-color: rgba(2, 2, 2, 0.692);
+        position: relative;
+        top: 20vw;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 5;
+    }
+    #fieldsWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
+    #ignorePantryContainer, #maxMinContainer{
+        width: 100%;
+    }
+
+    #keywordsSearchPanel input, #ingredientsSearchPanel input, #randomSearchPanel input{
+        background-color: black;
+        padding: 2px;
+        margin: 2px;
+
+    }
+    #keywordsSearchPanel button, #ingredientsSearchPanel button, #randomSearchPanel button{
+        background-color: rgb(0, 255, 0);
+        color: black;
+        padding: 2px;
+        margin: 2px;
+        border-radius: 0;
+    }
+
+    .checkbox{
+        width: 40px;
+        height: 40px;
+    }
+
+    #popUpBackground{
+
+        z-index: -1;
+        position: absolute;
+        height: inherit;
+        width: inherit;
+        background-image: url("https://www.ucsf.edu/sites/default/files/styles/article_feature_banner__image/public/2019-09/vegetables-cooking-food-banner-size.jpg");
+        filter: blur(10px) brightness(15%);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    #popUpWrapper{
+        color: rgba(255, 255, 255, 0.781);
+        z-index: 120;
+        position: fixed;
+        top: -1vw;
+        /* background-color: rgb(8, 8, 8); */
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+    }
+    #popUpWrapper button{
+
+        background-color: transparent;
+        margin: 1vw;
+        padding: 5px;
+    }
+    #popUpBtns{
+
+        display: flex;
+    }
+    #popUpContent{
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        margin: 2vw;
+
+    }
+    #ignorePantryContainer, #maxContainer, #minContainer{
+        display: flex;
+    }
+
+    #background{
+        background-color: black;
+        position: absolute;
+        height: 1700px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background-image: url("https://frontiersinblog.files.wordpress.com/2017/07/frontiers-in-ict-food-bridging.jpg?w=940");
+        background-repeat: no-repeat;
+        /* transform: rotate(90deg); */
+        /* z-index: -100; */
+        filter: blur(0px) brightness(30%);
+        background-size: cover;
+        background-position: center;
+        
+    }
+    #welcomeWrapper{
+        z-index: 2;
+        position: fixed;
+        top: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+    }
+    #welcome{
+        z-index: inherit;
+        width: 100%;
+    }
+    #socialsWrapper{
+        display: inline-flex;
+        border-radius: 2px;
+        column-gap: 1vw;
+        align-items: center;
+        justify-content: center;
+    }
+    #socialsWrapper img{
+        width: 20vw;
+        height: auto;
+        margin: 5vw;
+        background-color: rgba(255, 255, 255, 0.829);
+        padding: 5px;
+    }
+    #socialsWrapper img:hover{
+        position: relative;
+        bottom: 2px;
+    }
+    #socialsWrapper img:active{
+        position: relative;
+        top: 1px;
+    }
+
+
+    #keywordsSuggestionsWrapper,#ingredientsSuggestionsWrapper{
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        width: 90%;
+        background-color: rgba(0, 0, 0, 0.685);
+        padding: 3px 3px 20px 3px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        color: rgba(255, 255, 255, 0.719);
+        z-index: 121;
+        row-gap: 10px;
+    }
     
-}
-#welcomeWrapper{
-    position: absolute;
-    top: 20vw;
-    width: 50vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-}
-#welcome{
-    width: 50vw;
-}
-#socialsWrapper{
-    display: inline-flex;
-    border-radius: 2px;
-    column-gap: 1vw;
-    align-items: center;
-    justify-content: center;
-}
-#socialsWrapper img{
-    width: 6vw;
-    background-color: rgba(255, 255, 255, 0.829);
-    padding: 5px;
-    margin:2vw;
-}
-#socialsWrapper img:hover{
-    position: relative;
-    bottom: 2px;
-}
-#socialsWrapper img:active{
-    position: relative;
-    top: 1px;
+    #keywordsSuggestions, #ingredientsSuggestions, #suggestedIngredientsFilter{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        align-items: center;
+        justify-content: center;
+        row-gap: 5px;
+    }
+
+    #keywordsSuggestions p, #ingredientsSuggestions p, #suggestedIngredientsFilter button{
+        width: 25%;
+        background: #00162A;
+        margin: 1px;
+        padding: 2px;
+        border-radius: 3px;
+        text-align: center;
+        border-color: rgba(255, 255, 255, 0.281);
+        border-style: solid;
+    }
+    #ingredientsSuggestionsWrapper{
+        display: none;
+        top: 46%;
+    }
+
+    #keywordsSuggestionsWrapper{
+        display: none;
+        top: 33%;
+    }
+
+    #ingredientsSuggestions p{
+        display: none;
+    }
+    #errorMessageWrapper{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        width: 20vw;
+        background-color: rgba(255, 255, 255, 0.74);
+        height: 10vw;
+        position: fixed;
+        bottom: 50%;
+        border-radius: 5px;
+    }
+    #errorMessageCloseBtn{
+        width:100%;
+        border-style: none;
+        border-radius: 0px  0px 5px 5px;
+        background-color: rgb(242, 89, 84);
+        position: absolute;
+        top: 81%;
+        height: 20%;
+    }
+    #errorMessageWrapper img{
+        width: 20%;
+        position: absolute;
+        bottom: 60%;
+    }
 }
