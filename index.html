@@ -14,11 +14,71 @@
             <a href = "https://www.linkedin.com/in/c%C4%83t%C4%83linpop/"target="_blank"><img src= "linkedinLogo.png"></a>
         </div>
       </div>
+      <div id = "errorMessageWrapper">
+          <img src="errorIMG.png">
+          <p id = "errorMessage">
+              Error
+          </p>
+          <button id = "errorMessageCloseBtn">Dismiss
+          </button>
+      </div>
     
       <div id = "background"></div>
+      <div id = "errorPopup">
+          <button id = "exitErrorPopup">OK</button>
+      </div>
+      <div id = "keywordsSuggestionsWrapper">
+        <h4>Suggestions:</h4>
+        <div id = "keywordsSuggestions">
+            <p>Vegan</p>
+            <p>Italian</p>
+            <p>Vegetarian</p>
+            <p>French</p>
+            <p>Chinese</p>
+            <p>Healthy</p>
+            <p>Asian</p>
+            <p>Dessert</p>
+            <p>Salad</p>
+            <p>Christmas</p>
+            <p>Drinks</p>
+        </div>
+      </div>
+      <div id = "ingredientsSuggestionsWrapper">
+        <h4>Suggestions:</h4>
+        <div id = "suggestedIngredientsFilter">
+            <button id = "vegetablesFilterBtn">Vegetables</button>
+            <button id = "meatFilterBtn">Meat</button>
+            <button id = "othersFilterBtn">Others</button>
+        </div>
+      <div id = "ingredientsSuggestions">
+          <p class = "meat">Chicken</p>
+          <p class = "meat">Lamb</p>
+          <p class = "meat">Beef</p>
+          <p class = "meat">Pork</p>
+          <p class = "meat">Fish</p>
+          <p class = "meat">Turkey</p>
+          <p class = "meat">Salmon</p>
+          <p class = "meat">Shrimp</p>
+          <p class = "others">Egg</p>
+          <p class = "others">Rice</p>
+          <p class = "others">Pasta</p>
+          <p class = "others">Cheese</p>
+          <p class = "others">Milk</p>
+          <p class = "others">Soy</p>
+          <p class = "vegetables">Mushroom</p>
+          <p class = "vegetables">Onion</p>
+          <p class = "vegetables">Beans</p>
+          <p class = "vegetables">Avocado</p>
+          <p class = "vegetables">Broccoli</p>
+          <p class = "vegetables">Potato</p>
+          <p class = "vegetables">Carrot</p>
+          <p class = "vegetables">Spinach</p>
+          <p class = "vegetables">Garlic</p>
+      </div>
+    </div>
     <div id = "mainBar">
         <button id = "mainBarRandBtn">Get random recipe</button>
-        <button id = "mainBarKeywordsBtn">Get recipe by keywords</button> 
+        <button id = "mainBarKeywordsBtn">Get recipe by keyword</button> 
         <button id = "mainBarIngredientsBtn">Get recipe by ingredients</button>
         <button id = "savedRecipesBtn">Favorites</button>
      </div>
@@ -27,27 +87,27 @@
             <button id = "generateRandRecipeBtn">Get recipe(s)</button>
         </div>
         <div id ="keywordsSearchPanel">
-            <input id = "tag" placeholder = "Keywords...">
+            <input id = "tag" placeholder = "Keyword..." autocomplete="off">
             <input id = "recipesNumberKeywords" type = "number" placeholder = "How many recipes?">
             <button id = "generateKeywordsRecipeBtn">Get recipe(s)</button>
         </div>
 
         <div id ="ingredientsSearchPanel">
             <div id = "fieldsWrapper">
-            <input id = "userIngredients" placeholder = "Ingredients...">
+            <input id = "userIngredients" placeholder = "Ingredients..." autocomplete="off">
             <input id = "recipesNumberIngredients" type = "number" placeholder = "How many recipes?">
             <div id = "ignorePantryContainer">
-                <input type = "checkbox" id = "ignorePantry" value = "true">
+                <input type = "checkbox" id = "ignorePantry" value = "true" class = "checkbox">
                 <p> Ignore common ingredients(salt, water)</p>
             </div>
             <div id = "maxMinContainer">
                 <p>Choose one:</p>
                 <div id="maxContainer">
-                    <input id = "max" type = "checkbox" value = "1">
+                    <input id = "max" type = "checkbox" value = "1" class = "checkbox">
                     <p> Use as many of my ingredients as possible</p>
                 </div> 
                 <div id="minContainer">
-                    <input id = "min" type = "checkbox" value = "2">
+                    <input id = "min" type = "checkbox" value = "2"class = "checkbox">
                     <p> Require as few addititional ingredients as possible</p>
                 </div>
             </div>
