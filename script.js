@@ -10,6 +10,9 @@ let resultsAreaIngredients = document.getElementById("resultsAreaIngredients")
 let savedRecipesArea = document.getElementById("savedRecipesArea")
 let popUpContent = document.getElementById("popUpContent")
 
+let keywordsSuggestionsWrapper = document.getElementById("keywordsSuggestionsWrapper")
+let ingredientsSuggestionsWrapper = document.getElementById("ingredientsSuggestionsWrapper")
+
 let mainBarRandBtn = document.getElementById("mainBarRandBtn")
 let mainBarKeywordsBtn = document.getElementById("mainBarKeywordsBtn")
 let mainBarIngredientsBtn = document.getElementById("mainBarIngredientsBtn")
@@ -18,11 +21,16 @@ let savedRecipesBtn = document.getElementById('savedRecipesBtn')
 let background = document.getElementById("background")
 let welcome = document.getElementById("welcomeWrapper")
 let tags = document.getElementById("tag");
-let key = `65d0c224750644fc89eeaec6a8dcda5f`;
-// let key = "e295ac705d884295b9433b15cc133baf"
+// let key = `65d0c224750644fc89eeaec6a8dcda5f`;
+let key = "e295ac705d884295b9433b15cc133baf"
 let userIngredients = document.getElementById("userIngredients");
 
 const API_LINK = 'https://api.spoonacular.com/recipes/'
+
+let errorMessageWrapper = document.getElementById("errorMessageWrapper")
+let errorMessage = document.getElementById('errorMessage')
+let errorMessageCloseBtn = document.getElementById("errorMessageCloseBtn")
+
 
 //vars needed for caching/avoiding useless fetching
 let fetchedResultRand
@@ -42,15 +50,83 @@ const currentRecipeRand = {}
 const currentRecipeKeywords = {}
 const currentRecipeIngredients = {}
 
+let counter = 0
 
+//close error message popup event listener
+errorMessageCloseBtn.addEventListener("click", function(){
+    errorMessageWrapper.style.display = "none"
+})
+
+//suggestions panels functionality
+document.getElementById("ingredientsSuggestions").addEventListener("click", function (event){
+    console.log(event)
+        if (event.target.id !=="ingredientsSuggestions"){
+            event.target.style.display = "none"
+            console.log(event.target.innerText)
+            userIngredients.value += ((counter==0)?`${event.target.innerText}`:` ${ event.target.innerText}`)
+            counter++}
+})
+
+document.getElementById("keywordsSuggestions").addEventListener("click", function (event){
+    console.log(event)
+        if (event.target.id !=="keywordsSuggestions"){
+            event.target.style.display = "none"
+            console.log(event.target.innerText)
+            tags.value = `${event.target.innerText}`}
+})
+
+//suggestions wrappers manipulation based on user behavior
+tags.addEventListener("keydown", function(){
+    if (event.keyCode == 8){
+        if (tags.value.length ==1 && resultsAreaKeywords.innerText !==""){
+            keywordsSuggestionsWrapper.style.display = "flex"
+            resultsAreaKeywords.style.display = "none"
+}}})
 
 tags.addEventListener("focus", function(){
-    tags.placeholder = "Separated by 1 space"
-})
-tags.addEventListener("blur", function(){
-    tags.placeholder = "Keywords..."
+    if(tags.value ==""){
+        keywordsSuggestionsWrapper.style.display = "flex"
+        resultsAreaKeywords.style.display = "none"
+    }
 })
 
+background.addEventListener("click", function(){
+    //insert switch here
+    switch(state){
+        case "keywords":
+            if(resultsAreaKeywords.innerText !==""){
+                keywordsSuggestionsWrapper.style.display = "none"
+                resultsAreaKeywords.style.display = "grid"
+            }
+            break
+        case "ingredients":
+            if(resultsAreaIngredients.innerText !==""){
+                ingredientsSuggestionsWrapper.style.display = "none"
+                resultsAreaIngredients.style.display = "grid"
+            }
+            break
+        }
+})
+
+userIngredients.addEventListener("keydown", function(){
+    if (event.keyCode == 8){
+        if (userIngredients.value.length ==1 && resultsAreaIngredients.innerText !==""){
+            ingredientsSuggestionsWrapper.style.display = "flex"
+            resultsAreaIngredients.style.display = "none"
+
+}}})
+
+userIngredients.addEventListener("focus", function(){
+    if(userIngredients.value ==""){
+        ingredientsSuggestionsWrapper.style.display = "flex"
+        resultsAreaIngredients.style.display = "none"
+    }
+})
+
+
+
+
+//input fields palceholders events
 userIngredients.addEventListener("focus", function(){
     userIngredients.placeholder = "Separated by 1 space"
 })
@@ -58,25 +134,56 @@ userIngredients.addEventListener("blur", function(){
     userIngredients.placeholder = "Ingredients..."
 })
 
+document.getElementById("max").addEventListener("click", function (){
+    document.getElementById("min").checked = false
+})
 
+document.getElementById("min").addEventListener("click", function (){
+    document.getElementById("max").checked = false
+})
+
+//ingredients suggestion panel filter buttons
+document.getElementById("vegetablesFilterBtn").addEventListener("click", function (){
+    showIngredientsByClass(".vegetables")
+    hideIngredientsByClass(".meat")
+    hideIngredientsByClass(".others")
+})
+
+document.getElementById("meatFilterBtn").addEventListener("click", function (){
+    showIngredientsByClass(".meat")
+    hideIngredientsByClass(".vegetables")
+    hideIngredientsByClass(".others")
+})
+
+
+
+document.getElementById("othersFilterBtn").addEventListener("click", function (){
+    showIngredientsByClass(".others")
+    hideIngredientsByClass(".meat")
+    hideIngredientsByClass(".vegetables")
+})
+
+//main bar buttons functionality
 mainBarRandBtn.addEventListener("click", function(){
     state = "random" 
     event.target.style.backgroundColor = "rgba(255, 255, 255, 0.1)"
     mainBarKeywordsBtn.style.backgroundColor = "" 
     mainBarIngredientsBtn.style.backgroundColor = "" 
     savedRecipesBtn.style.backgroundColor = ""
-    randomSearchPanel.style.display = "inline-flex"
+    randomSearchPanel.style.display = "flex"
     keywordsSearchPanel.style.display = "none"
     ingredientsSearchPanel.style.display = "none"
     resultsAreaRand.style.display = "grid"
     resultsAreaIngredients.style.display = "none"
     savedRecipesArea.style.display = "none"
     resultsAreaKeywords.style.display = "none"
+    keywordsSuggestionsWrapper.style.display = "none"
     if (resultsAreaRand.innerText == ""){
         showWelcomeUnblurrBackground()
     }else{
         hideWelcomeBlurBackground()
     }
+    ingredientsSuggestionsWrapper.style.display = "none"
 })
 
 mainBarKeywordsBtn.addEventListener("click", function(){
@@ -87,7 +194,7 @@ mainBarKeywordsBtn.addEventListener("click", function(){
     savedRecipesBtn.style.backgroundColor = ""
     resultsAreaRand.style.display = "none"
     randomSearchPanel.style.display = "none"
-    keywordsSearchPanel.style.display = "inline-flex"
+    keywordsSearchPanel.style.display = "flex"
     ingredientsSearchPanel.style.display = "none"
     resultsAreaKeywords.style.display = "grid"
     resultsAreaIngredients.style.display = "none"
@@ -97,17 +204,21 @@ mainBarKeywordsBtn.addEventListener("click", function(){
     }else{
         hideWelcomeBlurBackground()
     }
+    ingredientsSuggestionsWrapper.style.display = "none"
+    // if (resultsAreaKeywords.innerText == ""){
+    //     keywordsSuggestionsWrapper.style.display  = "flex"
+    // }
 })
 mainBarIngredientsBtn.addEventListener('click', function(){
     state = "ingredients"
-    event.target.style.backgroundColor = "rgba(255, 255, 255, 0.1)"
+    this.style.backgroundColor = "rgba(255, 255, 255, 0.1)"
     mainBarRandBtn.style.backgroundColor = "" 
     mainBarKeywordsBtn.style.backgroundColor = ""  
     savedRecipesBtn.style.backgroundColor = ""
     randomSearchPanel.style.display = "none"
     resultsAreaRand.style.display = "none"
     keywordsSearchPanel.style.display = "none"
-    ingredientsSearchPanel.style.display = "inline-flex"
+    ingredientsSearchPanel.style.display = "flex"
     resultsAreaIngredients.style.display = "grid"
     resultsAreaKeywords.style.display = "none"
     savedRecipesArea.style.display = "none"
@@ -116,6 +227,10 @@ mainBarIngredientsBtn.addEventListener('click', function(){
     }else{
         hideWelcomeBlurBackground()
     }
+    // if (resultsAreaIngredients.innerText == ""){
+    //     ingredientsSuggestionsWrapper.style.display  = "flex"
+    // }
+    keywordsSuggestionsWrapper.style.display = "none"
 })
 
 savedRecipesBtn.addEventListener("click", function (){
@@ -138,46 +253,27 @@ savedRecipesBtn.addEventListener("click", function (){
     }else{
         hideWelcomeBlurBackground()
     }
+    keywordsSuggestionsWrapper.style.display = "none"
+    ingredientsSuggestionsWrapper.style.display = "none"
 })
 
-document.getElementById("max").addEventListener("click", function (){
-    document.getElementById("min").checked = false
-})
-
-document.getElementById("min").addEventListener("click", function (){
-    document.getElementById("max").checked = false
-})
+//generator buttons event listeners
 
 document.getElementById("generateRandRecipeBtn").addEventListener('click', function(){//keywords recipe gen btn
     getRandRecipe()})
 
 
 document.getElementById("generateKeywordsRecipeBtn").addEventListener('click', function(){//keywords recipe gen btn
+    keywordsSuggestionsWrapper.style.display = "none"
     getKeywordsRecipe()
 })
 
 document.getElementById('generateIngredientsRecipeBtn').addEventListener('click', function() {//whats in my fridge recipe gen btn
+    ingredientsSuggestionsWrapper.style.display = "none"
     getIngredientsRecipe()
 })
 
-
-document.querySelector("body").addEventListener("keyup", function(event){
-    if (event.keyCode == 13){
-        switch (state){
-            case "random":
-                getRandRecipe()
-                break
-            case "keywords":
-                getKeywordsRecipe()
-                break
-            case "ingredients":
-                getIngredientsRecipe()
-                break
-        }
-    }
-})
-
-
+//expand results
 resultsAreaIngredients.addEventListener("click", function(){
     expandRecipeIngredients(event)
 })
@@ -188,6 +284,11 @@ resultsAreaRand.addEventListener("click", function(){
     expandRecipeRand(event)
 })
 
+savedRecipesArea.addEventListener("click", function(){
+    expandSavedRecipes(event)
+})
+
+//exit button functionality
 document.getElementById("extBtn").addEventListener("click", function(){
     document.getElementById("popUpWrapper").style.display = "none"
 })
@@ -195,16 +296,33 @@ document.getElementById("extBtn").addEventListener("click", function(){
 document.querySelector("body").addEventListener("keyup", function(event){
     if (event.keyCode == 27){
         document.getElementById("popUpWrapper").style.display = "none"
-    }})
+}})
 
+//save button funcionality
 document.getElementById("saveRecipeBtn").addEventListener("click", function(){
     saveRecipe()
 })
 
-
-savedRecipesArea.addEventListener("click", function(){
-    expandSavedRecipes(event)
+//press enter to return results functionality
+document.querySelector("body").addEventListener("keyup", function(event){
+    if (event.keyCode == 13){
+        switch (state){
+            case "random":
+                getRandRecipe()
+                break
+            case "keywords":
+                keywordsSuggestionsWrapper.style.display = "none"
+                getKeywordsRecipe()
+                break
+            case "ingredients":
+                ingredientsSuggestionsWrapper.style.display = "none"
+                getIngredientsRecipe()
+                break
+        }
+    }
 })
+
+//functions
 
 function hideWelcomeBlurBackground(){
     background.style.filter =  "blur(15px) brightness(30%)";
@@ -233,7 +351,7 @@ function appendGen (elmType, parent, id){
     parent.append(appendedDiv)
 }
 
-function assignFetchedResult(source){
+function checkState(source){
     if (state == "keywords"){
         fetchedResultKeywords= source
         console.log(fetchedResultKeywords)
@@ -246,14 +364,20 @@ function assignFetchedResult(source){
 }
 
 function getRandRecipe (){
-    let numberOfRecipes = Math.trunc(document.getElementById("recipesNumberRand").value)
+    let noOfRecipes = document.getElementById("recipesNumberRand")
+    if (noOfRecipes.value ==""){
+        errorMessage.innerText = "You have not completed the required field"
+        errorMessageWrapper.style.display = 'flex'
+        return
+    }
+    let numberOfRecipes = Math.trunc(noOfRecipes.value)
     let url = `${API_LINK}random?apiKey=${key}&number=${numberOfRecipes}`
     getRecipe(url, numberOfRecipes, "resultsAreaRand")
     hideWelcomeBlurBackground()
 }
 
 function getKeywordsRecipe (){
-    let tag = tags.value
+    let tag = tags.innerText
     let numberOfRecipes = Math.trunc(document.getElementById("recipesNumberKeywords").value)
     let url = `${API_LINK}random?apiKey=${key}&number=${numberOfRecipes}&tags=${tag}`
     getRecipe(url, numberOfRecipes, "resultsAreaKeywords")
@@ -261,7 +385,7 @@ function getKeywordsRecipe (){
 }
 
 function getIngredientsRecipe (){
-    let ingredientsFinal = userIngredients.value.replace(/ /g, ",+")
+    let ingredientsFinal = userIngredients.value.replace(/ /g, ",+").toLowerCase()
     let numberOfRecipes = Math.trunc(document.getElementById("recipesNumberIngredients").value)
     let url = `${API_LINK}findByIngredients?apiKey=${key}&ignorePantry=${document.getElementById("ignorePantry").checked}&ranking=${(document.getElementById("min").checked) ? 2: 1}&ingredients=${ingredientsFinal}&number=${numberOfRecipes}`
     getRecipe(url, numberOfRecipes, "resultsAreaIngredients")
@@ -274,7 +398,7 @@ function getRecipe (url, numberOfRecipes, resultsContainerId){
     .then(response => response.json())
     .then(jsonResponse => {
         let result = ((state =="ingredients") ? jsonResponse : jsonResponse.recipes)
-        assignFetchedResult(result)
+        checkState(result)
         // if (state == "keywords"){
         //     fetchedResultKeywords= result
         //     console.log(fetchedResultKeywords)
@@ -305,8 +429,10 @@ function getRecipe (url, numberOfRecipes, resultsContainerId){
         if(numberOfRecipes<3){
             resultsContainer.style.gridTemplateColumns = `repeat(${numberOfRecipes}, 30vw)`
         }else{
-            resultsContainer.style.gridTemplateColumns = `repeat(3, 1fl)`
+            console.log(screen.width)
+            resultsContainer.style.gridTemplateColumns = ((screen.width<750) ? `repeat(2, 1fr)`: `repeat(3, 1fr)`)
         }
+        resultsContainer.style.display = "grid"
     })
 }
 
@@ -338,7 +464,7 @@ function displaySavedrecipes(){
     if(savedRecipes.length<3){
             savedRecipesArea.style.gridTemplateColumns = `repeat(${savedRecipes.length}, 30vw)`
     }else{
-            savedRecipesArea.style.gridTemplateColumns = `repeat(3, 1fl)`
+            savedRecipesArea.style.gridTemplateColumns = `repeat(3, 1fr)`
     }
 }
 
@@ -430,7 +556,7 @@ function appendSteps2 (value, parentId){
 }
 function showPopUp () {
     document.getElementById("popUpWrapper").style.padding = "20px"
-    document.getElementById("popUpWrapper").style.display = "flex"
+    document.getElementById("popUpWrapper").style.display = "inline-flex"
 }
 
 function expandRecipeKeywords (event){
@@ -493,4 +619,18 @@ function expandRecipeIngredients(event){
         appendSteps2(lastResponse, "prepSteps")
     })
     showPopUp()
+}
+
+function showIngredientsByClass(elmClass){
+    let nodeList = document.querySelectorAll(elmClass)
+    for (let index = 0; index<nodeList.length;index++){
+        nodeList[index].style.display  = "block"
+    }
+}
+
+function hideIngredientsByClass (elmClass){
+    let nodeList = document.querySelectorAll(elmClass)
+    for (let index = 0; index<nodeList.length;index++){
+        nodeList[index].style.display  = "none"
+    }
 }
